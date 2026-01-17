@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import confetti from "canvas-confetti";
 import Wheel from "./components/Wheel";
+import { getMockSpin } from "../../server/utils/mockApi";
 
 function App() {
   const [view, setView] = useState("START");
@@ -23,18 +24,23 @@ function App() {
       return alert("Please enter a valid email");
 
     try {
+      // Attempt to hit the real backend
       const { data } = await axios.post("http://localhost:3000/api/spin", {
         email,
       });
       setTargetAngle(data.targetAngle);
       setPrize(data.prize);
-      setIsSpinning(true);
-      setView("SPINNING");
     } catch (err) {
-      alert(
-        err.response?.data?.error || "Connection error. Is the server running?",
-      );
+      console.warn("Backend not found. Falling back to Mock Mode for demo.");
+
+      // Fallback to Mock logic
+      const mockData = getMockSpin();
+      setTargetAngle(mockData.targetAngle);
+      setPrize(mockData.prize);
     }
+
+    setIsSpinning(true);
+    setView("SPINNING");
   };
 
   const onSpinFinished = () => {
