@@ -1,15 +1,15 @@
-const PRIZE_CONFIG = [
-  { id: 0, label: "-5%", weight: 15 },
-  { id: 1, label: "-10%", weight: 10 },
-  { id: 2, label: "-20%", weight: 5 },
-  { id: 3, label: "-50%", weight: 2 },
-  { id: 4, label: "-5%", weight: 15 },
-  { id: 5, label: "-10%", weight: 10 },
-  { id: 6, label: "-20%", weight: 5 },
-  { id: 7, label: "-50%", weight: 2 },
-];
-
 export const getMockSpin = () => {
+  const PRIZE_CONFIG = [
+    { id: 0, label: "-5%", weight: 15 },
+    { id: 1, label: "-10%", weight: 10 },
+    { id: 2, label: "-20%", weight: 5 },
+    { id: 3, label: "-50%", weight: 2 },
+    { id: 4, label: "-5%", weight: 15 },
+    { id: 5, label: "-10%", weight: 10 },
+    { id: 6, label: "-20%", weight: 5 },
+    { id: 7, label: "-50%", weight: 2 },
+  ];
+
   const totalWeight = PRIZE_CONFIG.reduce((acc, p) => acc + p.weight, 0);
   let random = Math.random() * totalWeight;
   
@@ -29,7 +29,6 @@ export const getMockSpin = () => {
 
   return {
     prize: winner.label,
-    targetAngle: baseAngle - halfSegment + jitter,
-    isMock: true
+    targetAngle: baseAngle - halfSegment + jitter
   };
 };

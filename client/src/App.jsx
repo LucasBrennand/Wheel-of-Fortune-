@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import confetti from "canvas-confetti";
 import Wheel from "./components/Wheel";
-import { getMockSpin } from "../../server/utils/mockApi";
+import { getMockSpin } from "./utils/mockApi";
 
 function App() {
   const [view, setView] = useState("START");
